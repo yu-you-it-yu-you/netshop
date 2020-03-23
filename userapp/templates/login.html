@@ -4,16 +4,13 @@
 用户登录页面
 {% endblock %}
 
-
 {% block headerjs %}
 
     <script type="text/javascript" src="/static/md5-min.js"></script>
 
 {% endblock %}
 
-
 {% block main %}
-
 
      <div class="login-body">
         <div class="login-card">
@@ -47,22 +44,15 @@
         </div>
     </div>
 
-
-
 {% endblock %}
 
-
 {% block footerjs %}
-
 
     <script>
         //切换验证码
         function changeCode(imgObj){
             imgObj.src = '/user/loadCode.jpg?time='+new Date().getTime();
         }
-
-
-
 
         function isEmail(str){
             var reg = /^[a-zA-Z0-9_-]{6,}@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -93,18 +83,14 @@
                 return false;
             }
 
-
-
             var hex_pwd = hex_md5(password);
 
             //var hex_pwd = hex_md5(password+time)
             $('#pwd').val(hex_pwd);
 
+            return true;
+
         }
-
-
-
-
 
         function checkCode(txt){
             var cflag = false;

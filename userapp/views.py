@@ -4,7 +4,7 @@ from django.views import View
 
 from userapp.models import *
 from utils.code import gene_code
-from utils.captcha_image import ss
+from django.core.serializers import serialize
 
 class Register(View):
     def get(self, request):
@@ -87,3 +87,39 @@ class Checkcode(View):
         #判断code和sessionCode是否相等
         flag = code == sessionCode
         return JsonResponse({'checkFlag': flag})
+
+
+class Addressa(View):
+    def get(self, request):
+        user = request.session.get('user', '')
+        # 获取当前登录用户的所有收货地址
+        addrList = user.address_set.all()
+
+        return render(request, 'address.html', {'addrList': addrList})
+
+    def post(self, request):
+        #获取信息
+        aname = request.POST.get('aname', '')
+        aphone = request.POST.get('aphone', '')
+        addr = request.POST.get('addr', '')
+        #从session中获取user
+        user = request.session.get('user')
+        #插入数据库
+        address = Address.objects.create(aname=aname, aphone=aphone, addr=addr, userinfo=user, isdefault=(lambda count: True if count == 0 else False)(user.address_set.all().count()))
+        #获取当前用户的所有地址
+        addrList = user.address_set.all()
+        #在页面中显示
+        return render(request, 'address.html', {'addressList': addrList})
+
+
+
+# class LoadArea(View):
+#     def get(self, request):
+#         pid = request.GET.get('pid', -1)
+#         pid = int(pid)
+#         #通过pid查询区划信息
+#         areaList = Area.objects.filter(parentid=pid)
+#         #序列化areaList为子符串
+#         jareaList = serialize('json', areaList)
+#         return JsonResponse({'jareaList': jareaList})
+

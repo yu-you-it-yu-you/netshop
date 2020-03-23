@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-class Area(models.Model):
+class AreaD(models.Model):
     areaid = models.IntegerField(primary_key=True)
     areaname = models.CharField(max_length=50)
     parentid = models.IntegerField()
@@ -18,8 +18,7 @@ class Area(models.Model):
     status = models.IntegerField()
 
     class Meta:
-        managed = False
-        db_table = 'area'
+        db_table = 'aread'
 
 
 class UserInfo(models.Model):

@@ -22,7 +22,8 @@ from netshop.settings import DEBUG, MEDIA_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include('goods.urls')),
-    url(r'^user/', include('userapp.urls'))
+    url(r'^user/', include('userapp.urls')),
+    url(r'^cart/', include('cart.urls')),
 ]
 
 #后台上传读取下面这个路径

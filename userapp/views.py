@@ -74,6 +74,8 @@ class Login(View):
                 SessionCartManager(request.session).migrateSession2DB()
 
                 return HttpResponseRedirect('/cart/queryAll/')
+            elif red == 'order':
+                return HttpResponseRedirect('/order/order.html?cartitems='+request.POST.get('cartitems', ''))
 
             #成功后到用户中心
             return HttpResponseRedirect('/user/center/')

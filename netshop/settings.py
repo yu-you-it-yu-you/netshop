@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'goods.apps.GoodsConfig',
     'userapp',
     'cart',
+    'order',
 ]
 
 MIDDLEWARE = [

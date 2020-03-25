@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^', include('goods.urls')),
     url(r'^user/', include('userapp.urls')),
     url(r'^cart/', include('cart.urls')),
+    url(r'^order/', include('order.urls')),
 ]
 
 #后台上传读取下面这个路径

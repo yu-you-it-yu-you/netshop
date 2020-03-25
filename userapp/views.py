@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 
+from cart.cartmanager import SessionCartManager
 from userapp.models import *
 from utils.code import gene_code
 from django.core.serializers import serialize
@@ -50,8 +51,12 @@ class Logout(View):
 
 
 class Login(View):
-    def get(self,request):
-        return render(request, "login.html")
+    def get(self, request):
+        # 获取请求参数
+        red = request.GET.get('redirct', '')
+
+        return render(request, 'login.html', {'redirect': red})
+
     def post(self, request):
         uname = request.POST.get('uname', '')
         pwd = request.POST.get('pwd', '')
@@ -61,6 +66,15 @@ class Login(View):
         if userList:
             #把用户名存入session中
             request.session['user']=userList[0]
+
+            red = request.POST.get('redirect', '')
+            print('red==='+red)
+            if red == 'cart':
+                # 将session中的购物项移动到数据库
+                SessionCartManager(request.session).migrateSession2DB()
+
+                return HttpResponseRedirect('/cart/queryAll/')
+
             #成功后到用户中心
             return HttpResponseRedirect('/user/center/')
         return HttpResponseRedirect('/user/login/')

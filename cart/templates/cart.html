@@ -202,8 +202,9 @@
 
         //在购物车页面点击登录按钮后回转到购物车页面
         $('.sign > a').click(function(event){
-
+            //获取登录超链接的href值
             var link = $(this).attr('href')
+            //重新复制给href属性
             $(this).attr('href',link+"?redirct=cart")
         })
 

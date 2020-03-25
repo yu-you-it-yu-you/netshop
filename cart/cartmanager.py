@@ -1,5 +1,5 @@
 #coding=utf-8
-
+from django.db.models import F,Q
 from collections import OrderedDict
 from cart.models import *
 
@@ -116,7 +116,7 @@ class DBCartManger(CartManager):
 
     def update(self,goodsid,colorid,sizeid,step,*args,**kwargs):
 
-        self.user.cartitem_set.filter(goodsid=goodsid,colorid=colorid,sizeid=sizeid).update(count=F('count')+int(step),isdelete=False)
+        self.user.cartitem_set.filter(goodsid=goodsid,colorid=colorid,sizeid=sizeid).update(count=F('count')+int(step), isdelete=False)
 
     def queryAll(self,*args,**kwargs):
 

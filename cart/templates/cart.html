@@ -110,7 +110,7 @@
                 colorid:colorid,
                 sizeid:sizeid,
                 csrfmiddlewaretoken:csrfmiddlewaretoken,
-                type:'plus'
+                flag:'plus'
             }
             $.ajax({
                 async:false,
@@ -122,12 +122,11 @@
                 },
                 error:function(){
                     <!--按钮设置了两个点击事件-->
-
                     event.stopImmediatePropagation()
                 }
-
             })
         })
+            <!--给超链接绑定单击事件-->
           $('.reduce').click(function(event){
             <!--将数据同步到服务器-->
             if ($(this).next('input').val()<=1){
@@ -144,7 +143,7 @@
                 colorid:colorid,
                 sizeid:sizeid,
                 csrfmiddlewaretoken:csrfmiddlewaretoken,
-                type:'minus'
+                flag:'minus'
             }
 
             $.ajax({
@@ -163,6 +162,7 @@
 
             })
         })
+        <!--点击移除超链接按钮-->
         $('.delBtn').click(function(){
             var goodsid= $(this).attr('goodsid');
             var colorid= $(this).attr('colorid');
@@ -170,7 +170,7 @@
             $('.dialog-sure').attr('goodsid',goodsid).attr('colorid',colorid).attr('sizeid',sizeid)
         })
 
-
+        <!--点击确定按钮-->
         $('.dialog-sure').click(function(event){
             var goodsid= $(this).attr('goodsid');
             var colorid= $(this).attr('colorid');
@@ -182,7 +182,7 @@
                 colorid:colorid,
                 sizeid:sizeid,
                 csrfmiddlewaretoken:csrfmiddlewaretoken,
-                type:'delete'
+                flag:'delete'
             }
 
             $.ajax({
@@ -197,7 +197,6 @@
                     //停止事件传播
                     event.stopImmediatePropagation()
                 }
-
             })
         })
 
@@ -219,8 +218,6 @@
                     var goodsid = $(ck).parents('.order_lists').attr('goodsid')
                     var sizeid = $(ck).parents('.order_lists').attr('sizeid')
                     var colorid = $(ck).parents('.order_lists').attr('colorid')
-
-
 
                     cartitem.push(JSON.stringify({'goodsid':goodsid,'sizeid':sizeid,'colorid':colorid}))
 
